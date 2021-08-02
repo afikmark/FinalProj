@@ -40,17 +40,19 @@ public class BasePage {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
-    public void SelectByValue(WebElement el,String Value){
+
+    public void SelectByValue(WebElement el, String Value) {
         Select s = new Select(el);
         s.selectByVisibleText(Value);
     }
 
-    public void SelectByText(WebElement el, String text){
+    public void SelectByText(WebElement el, String text) {
         Select s = new Select(el);
         s.selectByVisibleText(text);
 
     }
-    public void SelectByIndex(WebElement el, int i){
+
+    public void SelectByIndex(WebElement el, int i) {
         Select s = new Select(el);
         s.selectByIndex(i);
 
