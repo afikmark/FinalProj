@@ -80,4 +80,13 @@
             //RegisterButton
 //            click(ap.RegBtn);
         }
+        public void SignupInvalidMail(String Email){
+            explicitWaitClickable(signInBtn);
+            click(signInBtn);
+            //Navigate to Authentication page
+            AuthenticationPage ap = new AuthenticationPage(driver);
+            explicitWaitVisibility(ap.createAccBox);
+            FillText(ap.emailAddressField, Email);
+            click(ap.CreateAccBtn);
+        }
     }

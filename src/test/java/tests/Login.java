@@ -17,4 +17,9 @@ public class Login extends BaseTest {
                 u.readProperty("AddtionalInfo"), u.readProperty("HomePhone"),
                 u.readProperty("MobilePhone"), u.readProperty("Alias"));
     }
+    @Test
+    public void InvalidEmail(){
+        HomePage hp = new HomePage(driver);
+        hp.SignupInvalidMail(u.readProperty("InvalidEmail"));
+    }
 }
