@@ -4,6 +4,7 @@
     import org.openqa.selenium.WebElement;
     import org.openqa.selenium.support.FindBy;
     import org.openqa.selenium.support.ui.Select;
+    import org.testng.Assert;
     import utils.Utils1;
 
     public class HomePage extends BasePage {
@@ -88,5 +89,8 @@
             explicitWaitVisibility(ap.createAccBox);
             FillText(ap.emailAddressField, Email);
             click(ap.CreateAccBtn);
+            explicitWaitVisibility(ap.createAccError);
+            String errortxt = ap.createAccError.getText();
+            Assert.assertEquals(errortxt,"Invalid email address.");
         }
     }

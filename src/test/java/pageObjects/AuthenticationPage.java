@@ -58,6 +58,8 @@ public class AuthenticationPage extends BasePage {
     WebElement Alias;
     @FindBy (css="#submitAccount")
     WebElement RegBtn;
+    @FindBy (css="#create_account_error>ol>li")
+    WebElement createAccError;
     public AuthenticationPage(WebDriver driver) {
         super(driver);
     }
