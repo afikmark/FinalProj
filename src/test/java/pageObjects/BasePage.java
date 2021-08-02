@@ -6,11 +6,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Utils1;
 
 import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     WebDriver driver;
+    Utils1 u = new Utils1();
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

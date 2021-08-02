@@ -11,7 +11,7 @@ import utils.Utils1;
 
 
 public class BaseTest {
-
+    Utils1 u = new Utils1();
     WebDriver driver;
 
     @BeforeClass
@@ -19,7 +19,6 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver", "C:\\WebSelenium\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        Utils1 u = new Utils1();
         driver.get(u.readProperty("url"));
 
     }
@@ -27,4 +26,11 @@ public class BaseTest {
         return driver.getCurrentUrl();
 
     }
+//    public void HandlePageLoad(){
+//        if(driver.getTitle().contains(u.readProperty("ResourceLimited"))){
+//            System.out.println("Page resource is limited");
+//            driver.quit();
+//            setup();
+//        }
+//    }
 }

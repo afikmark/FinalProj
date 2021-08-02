@@ -5,7 +5,7 @@ import pageObjects.HomePage;
 import utils.Utils1;
 
 public class Login extends BaseTest {
-    Utils1 u = new Utils1();
+
 
     @Test
     public void SignUpValid() {
@@ -17,9 +17,16 @@ public class Login extends BaseTest {
                 u.readProperty("AddtionalInfo"), u.readProperty("HomePhone"),
                 u.readProperty("MobilePhone"), u.readProperty("Alias"));
     }
+
     @Test
     public void InvalidEmail(){
         HomePage hp = new HomePage(driver);
         hp.SignupInvalidMail(u.readProperty("InvalidEmail"));
+    }
+
+    @Test
+    public void UsedMail(){
+        HomePage hp = new HomePage(driver);
+        hp.SignUpUsedEmail(u.readProperty("usedEmail"));
     }
 }
