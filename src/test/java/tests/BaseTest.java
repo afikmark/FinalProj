@@ -26,7 +26,7 @@ public class BaseTest {
         driver.get(u.readProperty("url"));
         String title = driver.getTitle();
         if (u.readProperty("PageTitle").equals(title)) {
-            System.out.println("Title is " + title);
+            System.out.println("Title is correct " + title);
         } else {
             int attempts = 0;
             while (attempts < 3) {
