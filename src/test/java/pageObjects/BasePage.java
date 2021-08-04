@@ -49,11 +49,19 @@ public class BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+
     public void explicitWaitAllElements(List<WebElement> elements) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
+
+
+  
+      public void explicitWaitAllElements(List<WebElement> elements) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
     public void SelectByValue(WebElement el, String Value) {
         Select s = new Select(el);
         s.selectByVisibleText(Value);
