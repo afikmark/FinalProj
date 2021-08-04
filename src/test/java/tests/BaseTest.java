@@ -1,4 +1,5 @@
 package tests;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,17 +21,22 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(u.readProperty("url"));
+        String url = driver.getCurrentUrl();
+        if (!url.contains(u.readProperty("url"))) {
+            driver.quit();
+            driver.get(u.readProperty("url"));
+        }
 
     }
-    public String getURL(){
+    @AfterClass
+    public void tearDown(){
+        driver.quit();
+    }
+    public String getURL() {
         return driver.getCurrentUrl();
 
     }
-//    public void HandlePageLoad(){
-//        if(driver.getTitle().contains(u.readProperty("ResourceLimited"))){
-//            System.out.println("Page resource is limited");
-//            driver.quit();
-//            setup();
-//        }
-//    }
+
+
 }
+
