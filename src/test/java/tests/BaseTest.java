@@ -1,17 +1,10 @@
 package tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import org.testng.internal.Utils;
-import pageObjects.HomePage;
 import utils.Utils1;
-
 
 public class BaseTest {
     Utils1 u = new Utils1();
@@ -39,8 +32,8 @@ public class BaseTest {
     }
 
 
-        @AfterClass
-    public void tearDown(){
+    @AfterClass
+    public void tearDown() {
         driver.quit();
     }
 
