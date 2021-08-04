@@ -39,13 +39,9 @@ public class BaseTest {
     }
 
 
-    //    @AfterClass
-//    public void tearDown(){
-//        driver.quit();
-//    }
-    public String getURL() {
-        return driver.getCurrentUrl();
-
+        @AfterClass
+    public void tearDown(){
+        driver.quit();
     }
 
 

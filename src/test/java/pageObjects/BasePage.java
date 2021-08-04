@@ -40,28 +40,21 @@ public class BasePage {
     }
 
     public void explicitWaitVisibility(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void explicitWaitClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
 
     public void explicitWaitAllElements(List<WebElement> elements) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
-
-
-  
-      public void explicitWaitAllElements(List<WebElement> elements) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
-    }
     public void SelectByValue(WebElement el, String Value) {
         Select s = new Select(el);
         s.selectByVisibleText(Value);
