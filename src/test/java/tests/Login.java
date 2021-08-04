@@ -41,7 +41,7 @@ public class Login extends BaseTest {
     @Test
     public void SignInValid(){
         HomePage hp = new HomePage(driver);
-        hp.SignIn(u.readProperty("SignInEmail"),u.readProperty("uxpEY7VbTWp8J"));
+        hp.SignIn(u.readProperty("SignInEmail"),u.readProperty("SignInPassword"));
     }
 
 }
