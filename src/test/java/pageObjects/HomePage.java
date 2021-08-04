@@ -167,6 +167,20 @@ public class HomePage extends BasePage {
 
 
     }
+
+    public void SignIn(String Email, String Password) {
+        AuthenticationPage ap = new AuthenticationPage(driver);
+        //Nav to Sign in page
+        click(signInBtn);
+        //Fill sign in credentials
+        FillText(ap.emailAddressSignIn, Email);
+        FillText(ap.PasswordSignIn, Password);
+        explicitWaitClickable(ap.SignInBtn);
+        click(ap.SignInBtn);
+        String URL = GetURL();
+       Assert.assertEquals(URL,u.readProperty("myAccountURL"));
+
+    }
 }
 
 

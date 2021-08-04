@@ -14,6 +14,12 @@ public class AuthenticationPage extends BasePage {
     WebElement emailAddressField;
     @FindBy (css=".icon-user.left")
     WebElement CreateAccBtn;
+    @FindBy (css="#email")
+    WebElement emailAddressSignIn;
+    @FindBy (css="#passwd")
+    WebElement PasswordSignIn;
+    @FindBy (css="#SubmitLogin")
+    WebElement SignInBtn;
     //CreateAccount
     @FindBy (css="#uniform-id_gender1")
     WebElement male;

@@ -38,4 +38,10 @@ public class Login extends BaseTest {
                 u.readProperty("InvalidHomePhone"), u.readProperty("InvalidMobilePhone"));
     }
 
+    @Test
+    public void SignInValid(){
+        HomePage hp = new HomePage(driver);
+        hp.SignIn(u.readProperty("SignInEmail"),u.readProperty("uxpEY7VbTWp8J"));
+    }
+
 }
