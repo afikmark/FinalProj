@@ -1,22 +1,28 @@
 package pageObjects;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Utils1;
-
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 
 public class BasePage {
     WebDriver driver;
     Utils1 u = new Utils1();
 
+
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+
+    }
+
+    public BasePage() {
 
     }
 
@@ -42,17 +48,24 @@ public class BasePage {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
-    public void SelectByValue(WebElement el,String Value){
+
+    public void explicitWaitAllElements(List<WebElement> elements) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
+
+    public void SelectByValue(WebElement el, String Value) {
         Select s = new Select(el);
         s.selectByVisibleText(Value);
     }
 
-    public void SelectByText(WebElement el, String text){
+    public void SelectByText(WebElement el, String text) {
         Select s = new Select(el);
         s.selectByVisibleText(text);
 
     }
-    public void SelectByIndex(WebElement el, int i){
+
+    public void SelectByIndex(WebElement el, int i) {
         Select s = new Select(el);
         s.selectByIndex(i);
 

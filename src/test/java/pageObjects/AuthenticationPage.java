@@ -3,6 +3,9 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+
+import java.util.List;
 
 public class AuthenticationPage extends BasePage {
     @FindBy(css="#create-account_form ")
