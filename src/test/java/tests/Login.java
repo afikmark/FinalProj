@@ -46,13 +46,13 @@ public class Login extends BaseTest {
     @Test
     public void SignInInvalidEmail(){
         HomePage hp = new HomePage(driver);
-        hp.SignIn(u.readProperty("InvalidEmail"),u.readProperty("SignInPassword"));
+        hp.SignInInvalidEmail(u.readProperty("InvalidEmail"),u.readProperty("SignInPassword"));
     }
 
     @Test
     public void SignInInvalidPW(){
         HomePage hp = new HomePage(driver);
-        hp.SignIn(u.readProperty("SignInEmail"),u.readProperty("InvalidPassword"));
+        hp.SignInInvalidPW(u.readProperty("SignInEmail"),u.readProperty("InvalidPassword"));
     }
 
     @Test

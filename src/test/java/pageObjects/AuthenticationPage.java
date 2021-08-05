@@ -23,6 +23,8 @@ public class AuthenticationPage extends BasePage {
     WebElement SignInBtn;
     @FindBy (css=".lost_password.form-group a")
     WebElement forgotPassword;
+    @FindBy (css=".alert.alert-danger >ol")
+    WebElement signInError;
     //CreateAccount
     @FindBy (css="#uniform-id_gender1")
     WebElement male;

@@ -15,7 +15,7 @@ public class HomePage extends BasePage {
     //Elements
     @FindBy(css = ".login")
     WebElement signInBtn;
-    @FindBy(css = ".logout")
+    @FindBy (css=".row .logout")
     WebElement signOutBtn;
 
     public HomePage(WebDriver driver) {
@@ -179,8 +179,38 @@ public class HomePage extends BasePage {
         click(ap.SignInBtn);
         String URL = GetURL();
        Assert.assertEquals(URL,u.readProperty("myAccountURL"));
+       explicitWaitClickable(signOutBtn);
+       click(signOutBtn);
+
 
     }
+    public void SignInInvalidEmail(String Email, String Password) {
+        AuthenticationPage ap = new AuthenticationPage(driver);
+        //Nav to Sign in page
+        click(signInBtn);
+        //Fill sign in credentials
+        FillText(ap.emailAddressSignIn, Email);
+        FillText(ap.PasswordSignIn, Password);
+        explicitWaitClickable(ap.SignInBtn);
+        click(ap.SignInBtn);
+        String ExpectedEmailNotification = u.readProperty("InvalidMailmsg");
+        String ActualEmailNotifcation = ap.signInError.getText();
+        Assert.assertEquals(ExpectedEmailNotification, ActualEmailNotifcation);
+    }
+    public void SignInInvalidPW (String Email, String Password) {
+        AuthenticationPage ap = new AuthenticationPage(driver);
+        //Nav to Sign in page
+        click(signInBtn);
+        //Fill sign in credentials
+        FillText(ap.emailAddressSignIn, Email);
+        FillText(ap.PasswordSignIn, Password);
+        explicitWaitClickable(ap.SignInBtn);
+        click(ap.SignInBtn);
+        String ExpectedEmailNotification = u.readProperty("InvalidPWmsg");
+        String ActualEmailNotifcation = ap.signInError.getText();
+        Assert.assertEquals(ExpectedEmailNotification, ActualEmailNotifcation);
+    }
+
     public void PasswordRecovery(String Email){
         AuthenticationPage ap = new AuthenticationPage(driver);
         PasswordRecoveryPage pr = new PasswordRecoveryPage(driver);
