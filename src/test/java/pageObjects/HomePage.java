@@ -181,6 +181,30 @@ public class HomePage extends BasePage {
        Assert.assertEquals(URL,u.readProperty("myAccountURL"));
 
     }
+    public void PasswordRecovery(String Email){
+        AuthenticationPage ap = new AuthenticationPage(driver);
+        PasswordRecoveryPage pr = new PasswordRecoveryPage(driver);
+        //Nav to Sign in page
+        click(signInBtn);
+        //Click on "Forgot your password"
+       explicitWaitClickable(ap.forgotPassword);
+       click(ap.forgotPassword);
+       //Navigate to "ForgotYourPassword" page
+        //enter email
+        FillText(pr.emailAddress,Email);
+        //click on retrieve password
+        explicitWaitClickable(pr.retrievePasswordBtn);
+        click(pr.retrievePasswordBtn);
+        //assert notification
+        String ExpectedPWrecoveryNotification = u.readProperty("ExpectedPWrecoveryNotification");
+        String ActualPWRecoveryNotification = pr.retrievePWNotification.getText();
+        Assert.assertEquals(ActualPWRecoveryNotification, ExpectedPWrecoveryNotification);
+        //click on back to login
+        explicitWaitClickable(pr.backToLoginBtn);
+        click(pr.backToLoginBtn);
+
+    }
+
 }
 
 

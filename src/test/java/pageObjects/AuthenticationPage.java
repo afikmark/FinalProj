@@ -14,12 +14,15 @@ public class AuthenticationPage extends BasePage {
     WebElement emailAddressField;
     @FindBy (css=".icon-user.left")
     WebElement CreateAccBtn;
+    //SignIn form
     @FindBy (css="#email")
     WebElement emailAddressSignIn;
     @FindBy (css="#passwd")
     WebElement PasswordSignIn;
     @FindBy (css="#SubmitLogin")
     WebElement SignInBtn;
+    @FindBy (css=".lost_password.form-group a")
+    WebElement forgotPassword;
     //CreateAccount
     @FindBy (css="#uniform-id_gender1")
     WebElement male;
@@ -69,6 +72,7 @@ public class AuthenticationPage extends BasePage {
     WebElement RegBtn;
     @FindBy (css="#create_account_error>ol>li")
     WebElement createAccError;
+
     public AuthenticationPage(WebDriver driver) {
         super(driver);
     }
