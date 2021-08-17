@@ -40,7 +40,7 @@ public class PasswordRecoveryPage extends HomePage {
     //Notifications
     final String validReocveryNotification ="A confirmation email has been sent to your address: aaa323231@gmail.com";
     final String invalidReocveryNotification = "There is no account registered for this email address.";
-    final String invalidRecoveryNotification2 ="There is 1 error"+"\r\n"+"Invalid email address.";
+    final String invalidRecoveryNotification2 ="There is 1 error"+"\n"+"Invalid email address.";
 
     public String getInvalidRecoveryNotification2() {
         return invalidRecoveryNotification2;

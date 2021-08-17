@@ -65,7 +65,7 @@ public class Login extends BaseTest {
         bp.click( ap.getForgotPassword());
     }
 
-    @Test(description = "Try to recover password with unregistered email")
+    @Test(description = "Try to recover password with invalid email")
     public void tc05_PasswordRecoveryUnregisteredMail() {
         PasswordRecoveryPage prp = new PasswordRecoveryPage(driver);
         prp.PasswordRecovery(inValidEmail);
