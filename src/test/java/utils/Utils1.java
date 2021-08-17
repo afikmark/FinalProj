@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Utils1 {
+    public Utils1() {
+    }
+
     public String readProperty(String key) {
         String value = "";
         try (InputStream input = new FileInputStream("./src/test/java/data/configuration.properties")) {

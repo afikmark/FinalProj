@@ -1,65 +1,80 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjects.AuthenticationPage;
+import pageObjects.BasePage;
 import pageObjects.HomePage;
+import pageObjects.PasswordRecoveryPage;
 
 public class Login extends BaseTest {
 
+    AuthenticationPage ap = new AuthenticationPage(driver);
+    final String validEmail = "aaa323231@gmail.com";
+    final String validPassword = "uxpEY7VbTWp8J@a";
+    final String inValidEmail = "InvalidMail";
+    final String invalidPassword = "1234";
+    final String expectedWrongEmail = "Invalid email address.";
+    final String expectedWrongPassword = "Invalid password.";
+    final String UnregisteredEmail = "NotRegisteredx199@gmail.com";
 
-    @Test
-    public void SignUpValid() {
+    @Test(description = "Sign in using valid email and password")
+    public void tc01_SignIn() {
         HomePage hp = new HomePage(driver);
-        hp.SignUp(u.readProperty("Email"), u.readProperty("FirstName"), u.readProperty("LastName"),
-                u.readProperty("Password"), 3, 10, 31,
-                u.readProperty("Company"), u.readProperty("Address"), u.readProperty("Address2"),
-                u.readProperty("City"), 5, 1, u.readProperty("Zip"),
-                u.readProperty("AddtionalInfo"), u.readProperty("HomePhone"),
-                u.readProperty("MobilePhone"), u.readProperty("Alias"));
-    }
+        hp.navToSignIn();
+        AuthenticationPage ap = new AuthenticationPage(driver);
+        ap.SignIn(validEmail, validPassword);
+        String expected = utils.readProperty("myAccountURL");
+        String actual = hp.getURL();
+        Assert.assertEquals(actual, expected);
+        hp.signOut();
 
-    @Test
-    public void InvalidEmail() {
-        HomePage hp = new HomePage(driver);
-        hp.SignupInvalidMail(u.readProperty("InvalidEmail"));
-    }
 
-    @Test
-    public void UsedMail() {
-        HomePage hp = new HomePage(driver);
-        hp.SignUpUsedEmail(u.readProperty("usedEmail"));
-    }
-
-    @Test
-    public void SignUpInvalid() {
-        HomePage hp = new HomePage(driver);
-        hp.SignUpInvalid(u.readProperty("Email"), u.readProperty("InvalidFirstName"),
-                u.readProperty("InvalidLastName")
-                , u.readProperty("InvalidPassword"), u.readProperty("InvalidZip"),
-                u.readProperty("InvalidHomePhone"), u.readProperty("InvalidMobilePhone"));
     }
 
-    @Test
-    public void SignInValid(){
-        HomePage hp = new HomePage(driver);
-        hp.SignIn(u.readProperty("SignInEmail"),u.readProperty("SignInPassword"));
-    }
-    @Test
-    public void SignInInvalidEmail(){
-        HomePage hp = new HomePage(driver);
-        hp.SignInInvalidEmail(u.readProperty("InvalidEmail"),u.readProperty("SignInPassword"));
+    @Test(description = "try to sign in with invalid email")
+    public void tc02_SignInInvalidEmail() {
+        AuthenticationPage ap = new AuthenticationPage(driver);
+        ap.SignIn(inValidEmail, validPassword);
+        String ActualEmailNotifcation = ap.getSignInError().getText();
+        Assert.assertEquals(ActualEmailNotifcation, expectedWrongEmail);
     }
 
-    @Test
-    public void SignInInvalidPW(){
+    @Test(description = "try to sign in with invalid password")
+    public void tc03_SignInInvalidPassword() {
         HomePage hp = new HomePage(driver);
-        hp.SignInInvalidPW(u.readProperty("SignInEmail"),u.readProperty("InvalidPassword"));
+        hp.navToSignIn();
+        AuthenticationPage ap = new AuthenticationPage(driver);
+        ap.SignIn(validEmail,invalidPassword);
+        String ActualEmailNotifcation = ap.getSignInError().getText();
+        Assert.assertEquals(ActualEmailNotifcation, expectedWrongPassword);
     }
 
-    @Test
-    public void PasswordRecovery(){
-        HomePage hp = new HomePage(driver);
-        hp.PasswordRecovery(u.readProperty("SignInEmail"));
+    @Test(description = "Password recovery flow valid")
+    public void tc04_PasswordRecovery() {
+        //Nav to passwordRecoveryPage
+        AuthenticationPage ap = new AuthenticationPage(driver);
+        BasePage bp = new BasePage(driver);
+        bp.click( ap.getForgotPassword());
+        PasswordRecoveryPage prp = new PasswordRecoveryPage(driver);
+        prp.PasswordRecovery(validEmail);
+        String ExpectedPWrecoveryNotification = prp.getValidReocveryNotification();
+        String ActualPWRecoveryNotification = prp.getRetrievePWNotification().getText();
+        Assert.assertEquals(ActualPWRecoveryNotification, ExpectedPWrecoveryNotification);
+        prp.ClickBackToLogin();
+        bp.click( ap.getForgotPassword());
     }
+
+    @Test(description = "Try to recover password with unregistered email")
+    public void tc05_PasswordRecoveryUnregisteredMail() {
+        PasswordRecoveryPage prp = new PasswordRecoveryPage(driver);
+        prp.PasswordRecovery(inValidEmail);
+        String ExpectedInvalidEmailNotification = prp.getInvalidRecoveryNotification2();
+        String ActualPWRecoveryNotification = prp.getFailRecoveryMsg().getText();
+        Assert.assertEquals(ActualPWRecoveryNotification,ExpectedInvalidEmailNotification);
+    }
+
+
 
 
 }
