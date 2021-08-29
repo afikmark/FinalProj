@@ -6,8 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.text.DateFormatSymbols;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AuthenticationPage extends HomePage {
@@ -161,7 +163,7 @@ public class AuthenticationPage extends HomePage {
     WebElement createAccBox;
     @FindBy(css = "#email_create")
     WebElement emailAddressField;
-    @FindBy(css = ".icon-user.left")
+    @FindBy(css = "#SubmitCreate")
     WebElement CreateAccBtn;
     //SignIn form
     @FindBy(css = "#email")
@@ -230,60 +232,8 @@ public class AuthenticationPage extends HomePage {
     @FindBy(css = "#create_account_error>ol>li")
     WebElement createAccError;
 
-
-
-
-    public void AssertDaySelector(User user, List<WebElement> ellist) {
-        navToSignIn();
-        fillText(emailAddressField, user.getEmail());
-        click(CreateAccBtn);
-        int counter = 0;
-        List<WebElement> daysSelect = ellist;
-        for (int i = 1; i < daysSelect.size(); i++) {
-            WebElement el = daysSelect.get(i);
-            counter++;
-            String dayslist = el.getText();
-            String counterstr = Integer.toString(counter);
-            Assert.assertEquals(dayslist, counterstr);
-
-        }
-
-    }
-
-    public void AssertMonthSelector(User user, List<WebElement> ellist) {
-        navToSignIn();
-        fillText(emailAddressField, user.getEmail());
-        click(CreateAccBtn);
-        String[] months = new DateFormatSymbols().getMonths();
-        for (String month : months) {
-            for (int i = 1; i < ellist.size(); i++) {
-                WebElement el = ellist.get(i);
-                String monthSelector = el.getText().trim();
-                Assert.assertEquals(monthSelector, month);
-            }
-
-        }
-    }
-
-    public void AssertYearSelector(User user, List<WebElement> ellist) {
-        navToSignIn();
-        fillText(emailAddressField, user.getEmail());
-        click(CreateAccBtn);
-        int counter = 1900;
-        ellist.remove(0);
-        for (WebElement el : ellist) {
-            String elstr = el.getText();
-            String counterstr = Integer.toString(counter);
-            Assert.assertEquals(elstr, counterstr);
-
-        }
-
-    }
-
+    //Todo: Remove Unecessary Navigations and clean up.
     public void SignUp(User user) {
-        //enter email
-        navToSignIn();
-        //Navigate to Authentication page
         explicitWaitVisibility(createAccBox);
         fillText(emailAddressField, user.getEmail());
         click(CreateAccBtn);
@@ -295,13 +245,7 @@ public class AuthenticationPage extends HomePage {
         fillText(FirstName, user.getFirstName());
         //Last name
         fillText(LastName, user.getLastName());
-        //Email
 
-        //FillText(Email, Email);
-
-        //FillText(Email, Email);
-
-        //Password
         fillText(Password, user.getPassword());
         //Date of birth
         selectByIndex(Day, user.getDay());
@@ -342,40 +286,24 @@ public class AuthenticationPage extends HomePage {
 
     }
 
-    public void SignupInvalidMail(String Email) {
-        navToSignIn();
-        //Navigate to Authentication page
-        explicitWaitVisibility(createAccBox);
+    public String SignupInvalidMail(String Email) {
         fillText(emailAddressField, Email);
         click(CreateAccBtn);
         explicitWaitVisibility(createAccError);
         String errortxt = createAccError.getText();
-        Assert.assertEquals(errortxt, utils.readProperty("InvalidMailmsg"));
+        return errortxt;
     }
 
-    public void SignUpUsedEmail(String Email) {
-        navToSignIn();
-//        bt.HandlePageLoad();
-        //Navigate to Authentication page
-        explicitWaitVisibility(createAccBox);
+    public String SignUpUsedEmail(String Email) {
         fillText(emailAddressField, Email);
         click(CreateAccBtn);
         explicitWaitVisibility(createAccError);
         String errortxt = createAccError.getText();
-        Assert.assertEquals(errortxt, utils.readProperty("UsedMailmsg"));
-
+        return errortxt;
     }
 
-    public void SignUpInvalid(String Email, String FirstName, String LastName, String Password, String Zip, String
+    public List<String> SignUpInvalid(String FirstName, String LastName, String Password, String Zip, String
             HomePhone, String MobilePhone) {
-        //enter email
-        navToSignIn();
-        //Navigate to Authentication page
-        explicitWaitVisibility(createAccBox);
-        fillText(emailAddressField, Email);
-        click(CreateAccBtn);
-        explicitWaitVisibility(RegBtn);
-        //Create an account
         //Choose gender - leave empty
         //First name
         fillText(this.FirstName, FirstName);
@@ -391,7 +319,6 @@ public class AuthenticationPage extends HomePage {
         //Last name
         fillText(this.LastName, LastName);
         //Zip
-        explicitWaitVisibility(this.Zip);
         fillText(this.Zip, Zip);
         //Home Phone
         fillText(this.Homephone, HomePhone);
@@ -399,13 +326,13 @@ public class AuthenticationPage extends HomePage {
         fillText(this.Mobilephone, MobilePhone);
         //RegisterButton
         click(this.RegBtn);
-        List<WebElement> erorList = driver.findElements(By.cssSelector(".alert.alert-danger li"));
-        for (int i = 0; i < erorList.size(); i++) {
-            String iString = String.valueOf(i);
-            String expectedErrorString = utils.readProperty(iString);
-            if (expectedErrorString != null)
-                Assert.assertEquals(erorList.get(i).getText(), expectedErrorString);
+        List<WebElement> errorList = driver.findElements(By.cssSelector(".alert.alert-danger li"));
+        ArrayList<String> errorListSTR = new ArrayList<String>();
+        for (WebElement error : errorList) {
+            String errorSTR = error.getText();
+            errorListSTR.add(errorSTR);
         }
+        return errorListSTR;
     }
 
     public void SignIn(String Email, String Password) {
@@ -415,8 +342,10 @@ public class AuthenticationPage extends HomePage {
         click(getSignInBtn());
     }
 
-
-
+    public void NavToSignUp(String Email) {
+        fillText(emailAddressField, Email);
+        click(CreateAccBtn);
+    }
 
 
 }

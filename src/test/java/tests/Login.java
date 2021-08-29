@@ -14,7 +14,7 @@ public class Login extends BaseTest {
     final String validPassword = "uxpEY7VbTWp8J@a";
     final String inValidEmail = "InvalidMail";
     final String invalidPassword = "1234";
-    final String expectedWrongEmail = "Invalid email address.";
+    final String expectedInvalidEmail = "Invalid email address.";
     final String expectedWrongPassword = "Invalid password.";
     final String UnregisteredEmail = "NotRegisteredx199@gmail.com";
 
@@ -37,7 +37,7 @@ public class Login extends BaseTest {
         AuthenticationPage ap = new AuthenticationPage(driver);
         ap.SignIn(inValidEmail, validPassword);
         String ActualEmailNotifcation = ap.getSignInError().getText();
-        Assert.assertEquals(ActualEmailNotifcation, expectedWrongEmail);
+        Assert.assertEquals(ActualEmailNotifcation, expectedInvalidEmail);
     }
 
     @Test(description = "try to sign in with invalid password")
