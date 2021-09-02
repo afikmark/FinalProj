@@ -28,8 +28,6 @@ public class Login extends BaseTest {
         String actual = hp.getURL();
         Assert.assertEquals(actual, expected);
         hp.signOut();
-
-
     }
 
     @Test(description = "try to sign in with invalid email")
@@ -52,17 +50,16 @@ public class Login extends BaseTest {
 
     @Test(description = "Password recovery flow valid")
     public void tc04_PasswordRecovery() {
-        //Nav to passwordRecoveryPage
         AuthenticationPage ap = new AuthenticationPage(driver);
         BasePage bp = new BasePage(driver);
-        bp.click( ap.getForgotPassword());
+        bp.Click( ap.getForgotPassword());
         PasswordRecoveryPage prp = new PasswordRecoveryPage(driver);
         prp.PasswordRecovery(validEmail);
         String ExpectedPWrecoveryNotification = prp.getValidReocveryNotification();
         String ActualPWRecoveryNotification = prp.getRetrievePWNotification().getText();
         Assert.assertEquals(ActualPWRecoveryNotification, ExpectedPWrecoveryNotification);
         prp.ClickBackToLogin();
-        bp.click( ap.getForgotPassword());
+        bp.Click( ap.getForgotPassword());
     }
 
     @Test(description = "Try to recover password with invalid email")

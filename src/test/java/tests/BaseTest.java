@@ -29,24 +29,24 @@ public class BaseTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(utils.readProperty("url"));
-        String title = driver.getTitle();
-        if (utils.readProperty("PageTitle").equals(title)) {
-            System.out.println("Title is correct " + title);
-        } else {
-            int attempts = 0;
-            while (attempts < 3) {
-                System.out.println("Error found, Restarting...");
-                driver.quit();
-                setup();
-                attempts++;
-            }
-        }
+//        String title = driver.getTitle();
+//        if (utils.readProperty("PageTitle").equals(title)) {
+//            System.out.println("Title is correct " + title);
+//        } else {
+//            int attempts = 0;
+//            while (attempts < 3) {
+//                System.out.println("Error found, Restarting...");
+//                driver.quit();
+//                setup();
+//                attempts++;
+//            }
+//        }
     }
 
-    @AfterClass
-    public void tearDown() {
-        driver.quit();
-    }
+//    @AfterClass
+//    public void tearDown() {
+//        driver.quit();
+//    }
 
 
 }

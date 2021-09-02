@@ -2,6 +2,7 @@ package pageObjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -69,9 +70,20 @@ public class BasePage {
         el.sendKeys(text);
     }
 
-    public void click(WebElement el) {
+    public void Click(WebElement el) {
         explicitWaitClickable(el);
         el.click();
+    }
+    public void DoubleClick(WebElement el){
+        Actions action = new Actions(driver);
+        action.doubleClick(el);
+        action.build();
+        action.perform();
+    }
+
+    public void MoveToElement(WebElement el){
+        Actions action = new Actions(driver);
+        action.moveToElement(el).build().perform();
     }
 
 }

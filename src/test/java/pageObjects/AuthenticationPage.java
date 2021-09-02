@@ -5,10 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
-import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -236,11 +233,11 @@ public class AuthenticationPage extends HomePage {
     public void SignUp(User user) {
         explicitWaitVisibility(createAccBox);
         fillText(emailAddressField, user.getEmail());
-        click(CreateAccBtn);
+        Click(CreateAccBtn);
         //Create an account
         //Choose gender
-        click(female);
-        click(male);
+        Click(female);
+        Click(male);
         //First name
         fillText(FirstName, user.getFirstName());
         //Last name
@@ -252,9 +249,9 @@ public class AuthenticationPage extends HomePage {
         selectByIndex(Month, user.getMonth());
         selectByIndex(Year, user.getYear());
         //Checkbox1
-        click(Checkbox1);
+        Click(Checkbox1);
         //Checkbox2
-        click(Checkbox2);
+        Click(Checkbox2);
         //First name
         fillText(FirstName, user.getFirstName());
         //Last name
@@ -288,7 +285,7 @@ public class AuthenticationPage extends HomePage {
 
     public String SignupInvalidMail(String Email) {
         fillText(emailAddressField, Email);
-        click(CreateAccBtn);
+        Click(CreateAccBtn);
         explicitWaitVisibility(createAccError);
         String errortxt = createAccError.getText();
         return errortxt;
@@ -296,7 +293,7 @@ public class AuthenticationPage extends HomePage {
 
     public String SignUpUsedEmail(String Email) {
         fillText(emailAddressField, Email);
-        click(CreateAccBtn);
+        Click(CreateAccBtn);
         explicitWaitVisibility(createAccError);
         String errortxt = createAccError.getText();
         return errortxt;
@@ -325,7 +322,7 @@ public class AuthenticationPage extends HomePage {
         //Mobile phone
         fillText(this.Mobilephone, MobilePhone);
         //RegisterButton
-        click(this.RegBtn);
+        Click(this.RegBtn);
         List<WebElement> errorList = driver.findElements(By.cssSelector(".alert.alert-danger li"));
         ArrayList<String> errorListSTR = new ArrayList<String>();
         for (WebElement error : errorList) {
@@ -339,12 +336,12 @@ public class AuthenticationPage extends HomePage {
         //Fill sign in credentials
         fillText(emailAddressSignIn, Email);
         fillText(PasswordSignIn, Password);
-        click(getSignInBtn());
+        Click(getSignInBtn());
     }
 
     public void NavToSignUp(String Email) {
         fillText(emailAddressField, Email);
-        click(CreateAccBtn);
+        Click(CreateAccBtn);
     }
 
 
