@@ -2,11 +2,20 @@ package tests;
 
 import entity.User;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import utils.Utils1;
+
+import java.io.File;
+import java.io.IOException;
 
 public class BaseTest {
 
@@ -22,31 +31,34 @@ public class BaseTest {
 
 
     @BeforeClass
-    public void setup() {
-//        System.setProperty("webdriver.chrome.driver", "C:\\WebSelenium\\chromedriver_win32\\chromedriver.exe");
-//        driver = new ChromeDriver();
+    public void setup(ITestContext testContext) {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(utils.readProperty("url"));
-//        String title = driver.getTitle();
-//        if (utils.readProperty("PageTitle").equals(title)) {
-//            System.out.println("Title is correct " + title);
-//        } else {
-//            int attempts = 0;
-//            while (attempts < 3) {
-//                System.out.println("Error found, Restarting...");
-//                driver.quit();
-//                setup();
-//                attempts++;
-//            }
-//        }
+        testContext.setAttribute("WebDriver", this.driver);
+    }
+    @AfterMethod
+    public void failedTest(ITestResult result) {
+        //check if the test failed
+        if (result.getStatus() == ITestResult.FAILURE ){
+            TakesScreenshot ts = (TakesScreenshot)driver;
+            File srcFile = ts.getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile, new File("./ScreenShots/"+result.getName() +".jpg"));
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            //result.getname() method will give you current test case name.
+            //./ScreenShots/ tell you that, in your current directory, create folder ScreenShots. dot represents current directory
+        }
     }
 
-//    @AfterClass
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
 
 
 }

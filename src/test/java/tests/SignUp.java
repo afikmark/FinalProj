@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AuthenticationPage;
@@ -29,6 +30,7 @@ public class SignUp extends Login {
 //            6 = This country requires you to choose a State.
 
     @Test(description = "Sign-up with valid information")
+    @Description("Sign-up with valid information")
     public void SignUpValid() {
         HomePage hp = new HomePage(driver);
         AuthenticationPage ap = new AuthenticationPage(driver);
@@ -37,6 +39,7 @@ public class SignUp extends Login {
     }
 
     @Test(description = "Sign up with invalid form information")
+    @Description("Sign up with invalid form information")
     public void SignUpInvalid() {
         expectedErrorList.add("lastname is invalid.");
         expectedErrorList.add("firstname is invalid.");
@@ -54,6 +57,7 @@ public class SignUp extends Login {
     }
 
     @Test(description = "Sign up with invalid email")
+    @Description("Sign up with invalid email")
     public void InvalidEmail() {
         HomePage hp = new HomePage(driver);
         AuthenticationPage ap = new AuthenticationPage(driver);
@@ -63,6 +67,7 @@ public class SignUp extends Login {
     }
 
     @Test(description = "Sign up with used mail")
+    @Description("Sign up with used mail")
     public void UsedMail() {
         HomePage hp = new HomePage(driver);
         AuthenticationPage ap = new AuthenticationPage(driver);

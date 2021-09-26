@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class TShirts extends Women{
-    public TShirts(WebDriver driver) {
+public class TShirtsPage extends WomenPage {
+    public TShirtsPage(WebDriver driver) {
         super(driver);
     }
     @FindBy (css="#uniform-layered_id_attribute_group_1")

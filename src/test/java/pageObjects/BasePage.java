@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class BasePage {
+public abstract class BasePage {
     WebDriver driver;
     Utils1 utils = new Utils1();
 
@@ -33,18 +33,18 @@ public class BasePage {
     }
 
     public void explicitWaitVisibility(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void explicitWaitClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
 
     public void explicitWaitAllElements(List<WebElement> elements) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 

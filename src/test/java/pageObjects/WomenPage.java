@@ -7,8 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Women extends HomePage{
-    public Women(WebDriver driver) {
+public class WomenPage extends HomePage{
+    public WomenPage(WebDriver driver) {
         super(driver);
     }
     @FindBy(css = ".subcategory-image  [title='Tops']")

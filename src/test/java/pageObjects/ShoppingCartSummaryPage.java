@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ShoppingCartSummary extends HomePage {
-    public ShoppingCartSummary(WebDriver driver) {
+public class ShoppingCartSummaryPage extends HomePage {
+    public ShoppingCartSummaryPage(WebDriver driver) {
         super(driver);
     }
 

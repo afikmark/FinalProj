@@ -1,11 +1,15 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AuthenticationPage;
 import pageObjects.BasePage;
 import pageObjects.HomePage;
 import pageObjects.PasswordRecoveryPage;
+import utils.AllureAttachment;
 
 public class Login extends BaseTest {
 
@@ -19,6 +23,8 @@ public class Login extends BaseTest {
     final String UnregisteredEmail = "NotRegisteredx199@gmail.com";
 
     @Test(description = "Sign in using valid email and password")
+    @Description("Sign in using valid email and password")
+    @Severity(SeverityLevel.CRITICAL)
     public void tc01_SignIn() {
         HomePage hp = new HomePage(driver);
         hp.navToSignIn();
@@ -28,9 +34,12 @@ public class Login extends BaseTest {
         String actual = hp.getURL();
         Assert.assertEquals(actual, expected);
         hp.signOut();
+        AllureAttachment.addTextAttachment("Signed in and out successfully");
     }
 
     @Test(description = "try to sign in with invalid email")
+    @Description("try to sign in with invalid email")
+    @Severity(SeverityLevel.NORMAL)
     public void tc02_SignInInvalidEmail() {
         AuthenticationPage ap = new AuthenticationPage(driver);
         ap.SignIn(inValidEmail, validPassword);
@@ -39,6 +48,8 @@ public class Login extends BaseTest {
     }
 
     @Test(description = "try to sign in with invalid password")
+    @Description("try to sign in with invalid password")
+    @Severity(SeverityLevel.NORMAL)
     public void tc03_SignInInvalidPassword() {
         HomePage hp = new HomePage(driver);
         hp.navToSignIn();
@@ -49,20 +60,23 @@ public class Login extends BaseTest {
     }
 
     @Test(description = "Password recovery flow valid")
+    @Description("Password recovery flow valid")
+    @Severity(SeverityLevel.CRITICAL)
     public void tc04_PasswordRecovery() {
         AuthenticationPage ap = new AuthenticationPage(driver);
-        BasePage bp = new BasePage(driver);
-        bp.Click( ap.getForgotPassword());
+        ap.Click( ap.getForgotPassword());
         PasswordRecoveryPage prp = new PasswordRecoveryPage(driver);
         prp.PasswordRecovery(validEmail);
         String ExpectedPWrecoveryNotification = prp.getValidReocveryNotification();
         String ActualPWRecoveryNotification = prp.getRetrievePWNotification().getText();
         Assert.assertEquals(ActualPWRecoveryNotification, ExpectedPWrecoveryNotification);
         prp.ClickBackToLogin();
-        bp.Click( ap.getForgotPassword());
+        ap.Click( ap.getForgotPassword());
     }
 
     @Test(description = "Try to recover password with invalid email")
+    @Description("Try to recover password with invalid email")
+    @Severity(SeverityLevel.MINOR)
     public void tc05_PasswordRecoveryUnregisteredMail() {
         PasswordRecoveryPage prp = new PasswordRecoveryPage(driver);
         prp.PasswordRecovery(inValidEmail);

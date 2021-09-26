@@ -198,7 +198,7 @@ public class AuthenticationPage extends HomePage {
     WebElement Year;
     @FindBy(css = "#years option")
     List<WebElement> YearsContainer;
-    @FindBy(css = "#newsletter")
+    @FindBy(css = "#uniform-newsletter #newsletter")
     WebElement Checkbox1;
     @FindBy(css = "#optin")
     WebElement Checkbox2;
@@ -231,7 +231,7 @@ public class AuthenticationPage extends HomePage {
 
     //Todo: Remove Unecessary Navigations and clean up.
     public void SignUp(User user) {
-        explicitWaitVisibility(createAccBox);
+//        explicitWaitVisibility(createAccBox);
         fillText(emailAddressField, user.getEmail());
         Click(CreateAccBtn);
         //Create an account
@@ -242,7 +242,6 @@ public class AuthenticationPage extends HomePage {
         fillText(FirstName, user.getFirstName());
         //Last name
         fillText(LastName, user.getLastName());
-
         fillText(Password, user.getPassword());
         //Date of birth
         selectByIndex(Day, user.getDay());

@@ -1,5 +1,6 @@
 package pageObjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,18 +20,15 @@ public class HomePage extends BasePage {
     public HomePage(WebDriver driver) {
         super(driver);
     }
-
+    @Step("Navigate to sign in page {0}")
     public void navToSignIn(){
         Click(signInBtn);
     }
+    @Step("Click on signout button {1}")
     public void signOut(){
         Click(signOutBtn);
     }
-
-    public void HoverWomen(){
-        MoveToElement(womenCategory);
-    }
-
+    @Step("Click on WomenPage category {2}")
     public void ClickWomenCat(){
         Click(womenCategory);
     }
