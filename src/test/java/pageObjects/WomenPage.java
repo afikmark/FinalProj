@@ -19,6 +19,8 @@ public class WomenPage extends HomePage{
     private List<WebElement>itemsList;
 //    @FindBy (css="#add_to_cart")
 //    private WebElement addToCartBtn;
+    @FindBy (css=".block_content >ul>li.last>a")
+    private WebElement Dresses;
     @FindBy (css=".btn[title='Proceed to checkout']")
     private WebElement proceedToCheckoutBtn;
     @FindBy (css =".button-container [title='Add to cart']")
@@ -33,7 +35,31 @@ public class WomenPage extends HomePage{
         Click(tshirts);
     }
 
-//    public WebElement getAddToCartBtn() {
+    public WebElement getTops() {
+        return tops;
+    }
+
+    public WebElement getTshirts() {
+        return tshirts;
+    }
+
+    public List<WebElement> getItemsList() {
+        return itemsList;
+    }
+
+    public WebElement getDresses() {
+        return Dresses;
+    }
+
+    public List<WebElement> getAddToCartBtnList() {
+        return addToCartBtnList;
+    }
+
+    public List<WebElement> getChooseColorList() {
+        return chooseColorList;
+    }
+
+    //    public WebElement getAddToCartBtn() {
 //        return addToCartBtn;
 //    }
 public WebElement getProceedToCheckoutBtn() {

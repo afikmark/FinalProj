@@ -10,16 +10,8 @@ import pageObjects.*;
 public class ShoppingCart extends Login {
 
     final String expectedOrderCompleteMSG = "Your order on My Store is complete.";
+    final String expectedDressesCategory = "Dresses";
 
-    @Test(description = "Sign in")
-    @Description("Sign in")
-    @Severity(SeverityLevel.CRITICAL)
-    public void validSignIN(){
-        HomePage hp = new HomePage(driver);
-        hp.navToSignIn();
-        AuthenticationPage ap = new AuthenticationPage(driver);
-        ap.SignIn(validEmail, validPassword);
-    }
     @Test(description = "Choose product from list")
     @Description("Choose product from list")
     @Severity(SeverityLevel.CRITICAL)
@@ -58,7 +50,10 @@ public class ShoppingCart extends Login {
     public void colorSelection(){
         HomePage hp = new HomePage(driver);
         hp.ClickWomenCat();
-
+        WomenPage wp = new WomenPage(driver);
+        hp.Click(wp.getDresses());
+        String categoryName = checkCategory();
+        Assert.assertEquals(categoryName,expectedDressesCategory);
     }
 
 }

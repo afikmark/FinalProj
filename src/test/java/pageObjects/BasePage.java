@@ -28,6 +28,7 @@ public abstract class BasePage {
     }
 
 
+
     public void implicitWait(long timeunit) {
         driver.manage().timeouts().implicitlyWait(timeunit, TimeUnit.SECONDS);
     }
@@ -85,5 +86,6 @@ public abstract class BasePage {
         Actions action = new Actions(driver);
         action.moveToElement(el).build().perform();
     }
+
 
 }

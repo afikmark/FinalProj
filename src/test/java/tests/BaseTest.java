@@ -12,6 +12,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import pageObjects.HomePage;
 import utils.Utils1;
 
 import java.io.File;
@@ -55,11 +56,17 @@ public class BaseTest {
         }
     }
 
+
+
+    public String checkCategory(){
+        HomePage hp = new HomePage(driver);
+       String categoryName = hp.getCategoryName().getText();
+       return  categoryName;
+    }
+
     @AfterClass
     public void tearDown() {
         driver.quit();
     }
-
-
 }
 

@@ -16,6 +16,28 @@ public class HomePage extends BasePage {
     private WebElement womenCategory;
     @FindBy (css= "#block_top_menu .submenu-container ul >li [title='T-shirts']")
     private  WebElement womenTshirts;
+    @FindBy (css=".category-name")
+    WebElement categoryName;
+
+    public WebElement getSignInBtn() {
+        return signInBtn;
+    }
+
+    public WebElement getSignOutBtn() {
+        return signOutBtn;
+    }
+
+    public WebElement getWomenCategory() {
+        return womenCategory;
+    }
+
+    public WebElement getWomenTshirts() {
+        return womenTshirts;
+    }
+
+    public WebElement getCategoryName() {
+        return categoryName;
+    }
 
     public HomePage(WebDriver driver) {
         super(driver);
