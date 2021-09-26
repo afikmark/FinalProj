@@ -52,7 +52,7 @@ public class ShoppingCart extends Login {
         Assert.assertEquals(confirmationText,expectedOrderCompleteMSG);
     }
 
-    @Test(description = "Select color")
+    @Test(description = "Select color1")
     @Description("Select color")
     @Severity(SeverityLevel.MINOR)
     public void colorSelection(){
