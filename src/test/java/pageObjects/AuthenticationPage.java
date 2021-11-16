@@ -12,6 +12,79 @@ import java.util.List;
 public class AuthenticationPage extends HomePage {
 
 
+    @FindBy(css = "#create-account_form ")
+    WebElement createAccBox;
+    @FindBy(css = "#email_create")
+    WebElement emailAddressField;
+    @FindBy(css = "#SubmitCreate")
+    WebElement CreateAccBtn;
+    //SignIn form
+    @FindBy(css = "#email")
+    WebElement emailAddressSignIn;
+    @FindBy(css = "#passwd")
+    WebElement PasswordSignIn;
+    @FindBy(css = "#SubmitLogin")
+    WebElement SignInBtn;
+    @FindBy(css = ".lost_password.form-group a")
+    WebElement forgotPassword;
+    @FindBy(css = ".alert.alert-danger >ol")
+    WebElement signInError;
+    //CreateAccount
+    @FindBy(css = "#uniform-id_gender1")
+    WebElement male;
+    @FindBy(css = "#uniform-id_gender2")
+    WebElement female;
+    @FindBy(css = "#customer_firstname")
+    WebElement FirstName;
+    @FindBy(css = "#customer_lastname")
+    WebElement LastName;
+    @FindBy(css = "#email")
+    WebElement Email;
+    @FindBy(css = "#passwd")
+    WebElement Password;
+    @FindBy(css = "#days")
+    WebElement Day;
+    @FindBy(css = "#days option")
+    List<WebElement> DayContainer;
+    @FindBy(css = "#months")
+    WebElement Month;
+    @FindBy(css = "#months option")
+    List<WebElement> MonthsContainer;
+    @FindBy(css = "#years")
+    WebElement Year;
+    @FindBy(css = "#years option")
+    List<WebElement> YearsContainer;
+    @FindBy(css = "#uniform-newsletter #newsletter")
+    WebElement Checkbox1;
+    @FindBy(css = "#optin")
+    WebElement Checkbox2;
+    @FindBy(css = "#company")
+    WebElement Company;
+    @FindBy(css = "#address1")
+    WebElement Address;
+    @FindBy(css = "#address2")
+    WebElement Address2;
+    @FindBy(css = "#city")
+    WebElement City;
+    @FindBy(css = "#id_state")
+    WebElement State;
+    @FindBy(css = "#postcode")
+    WebElement Zip;
+    @FindBy(css = "#id_country")
+    WebElement Country;
+    @FindBy(css = "#other")
+    WebElement AdditionalInfo;
+    @FindBy(css = "#phone")
+    WebElement Homephone;
+    @FindBy(css = "#phone_mobile")
+    WebElement Mobilephone;
+    @FindBy(css = "#alias")
+    WebElement Alias;
+    @FindBy(css = "#submitAccount")
+    WebElement RegBtn;
+    @FindBy(css = "#create_account_error>ol>li")
+    WebElement createAccError;
+
     public AuthenticationPage(WebDriver driver) {
         super(driver);
     }
@@ -156,88 +229,11 @@ public class AuthenticationPage extends HomePage {
         return createAccError;
     }
 
-    @FindBy(css = "#create-account_form ")
-    WebElement createAccBox;
-    @FindBy(css = "#email_create")
-    WebElement emailAddressField;
-    @FindBy(css = "#SubmitCreate")
-    WebElement CreateAccBtn;
-    //SignIn form
-    @FindBy(css = "#email")
-    WebElement emailAddressSignIn;
-    @FindBy(css = "#passwd")
-    WebElement PasswordSignIn;
-    @FindBy(css = "#SubmitLogin")
-    WebElement SignInBtn;
-    @FindBy(css = ".lost_password.form-group a")
-    WebElement forgotPassword;
-    @FindBy(css = ".alert.alert-danger >ol")
-    WebElement signInError;
-    //CreateAccount
-    @FindBy(css = "#uniform-id_gender1")
-    WebElement male;
-    @FindBy(css = "#uniform-id_gender2")
-    WebElement female;
-    @FindBy(css = "#customer_firstname")
-    WebElement FirstName;
-    @FindBy(css = "#customer_lastname")
-    WebElement LastName;
-    @FindBy(css = "#email")
-    WebElement Email;
-    @FindBy(css = "#passwd")
-    WebElement Password;
-    @FindBy(css = "#days")
-    WebElement Day;
-    @FindBy(css = "#days option")
-    List<WebElement> DayContainer;
-    @FindBy(css = "#months")
-    WebElement Month;
-    @FindBy(css = "#months option")
-    List<WebElement> MonthsContainer;
-    @FindBy(css = "#years")
-    WebElement Year;
-    @FindBy(css = "#years option")
-    List<WebElement> YearsContainer;
-    @FindBy(css = "#uniform-newsletter #newsletter")
-    WebElement Checkbox1;
-    @FindBy(css = "#optin")
-    WebElement Checkbox2;
-    @FindBy(css = "#company")
-    WebElement Company;
-    @FindBy(css = "#address1")
-    WebElement Address;
-    @FindBy(css = "#address2")
-    WebElement Address2;
-    @FindBy(css = "#city")
-    WebElement City;
-    @FindBy(css = "#id_state")
-    WebElement State;
-    @FindBy(css = "#postcode")
-    WebElement Zip;
-    @FindBy(css = "#id_country")
-    WebElement Country;
-    @FindBy(css = "#other")
-    WebElement AdditionalInfo;
-    @FindBy(css = "#phone")
-    WebElement Homephone;
-    @FindBy(css = "#phone_mobile")
-    WebElement Mobilephone;
-    @FindBy(css = "#alias")
-    WebElement Alias;
-    @FindBy(css = "#submitAccount")
-    WebElement RegBtn;
-    @FindBy(css = "#create_account_error>ol>li")
-    WebElement createAccError;
-
     //Todo: Remove Unecessary Navigations and clean up.
-    public void SignUp(User user) {
-//        explicitWaitVisibility(createAccBox);
-        fillText(emailAddressField, user.getEmail());
-        Click(CreateAccBtn);
-        //Create an account
-        //Choose gender
-        Click(female);
-        Click(male);
+    public void SignUp(User user, String email) {
+        createAccount(email);
+        click(female);
+        click(male);
         //First name
         fillText(FirstName, user.getFirstName());
         //Last name
@@ -248,9 +244,9 @@ public class AuthenticationPage extends HomePage {
         selectByIndex(Month, user.getMonth());
         selectByIndex(Year, user.getYear());
         //Checkbox1
-        Click(Checkbox1);
+        click(Checkbox1);
         //Checkbox2
-        Click(Checkbox2);
+        click(Checkbox2);
         //First name
         fillText(FirstName, user.getFirstName());
         //Last name
@@ -282,20 +278,13 @@ public class AuthenticationPage extends HomePage {
 
     }
 
-    public String SignupInvalidMail(String Email) {
+    public String createAccount(String Email) {
         fillText(emailAddressField, Email);
-        Click(CreateAccBtn);
+        click(CreateAccBtn);
         explicitWaitVisibility(createAccError);
-        String errortxt = createAccError.getText();
-        return errortxt;
-    }
-
-    public String SignUpUsedEmail(String Email) {
-        fillText(emailAddressField, Email);
-        Click(CreateAccBtn);
-        explicitWaitVisibility(createAccError);
-        String errortxt = createAccError.getText();
-        return errortxt;
+        var isdisplayed = createAccError.isDisplayed();
+        var error = isdisplayed ? createAccError.getText() : "";
+        return error;
     }
 
     public List<String> SignUpInvalid(String FirstName, String LastName, String Password, String Zip, String
@@ -321,7 +310,7 @@ public class AuthenticationPage extends HomePage {
         //Mobile phone
         fillText(this.Mobilephone, MobilePhone);
         //RegisterButton
-        Click(this.RegBtn);
+        click(this.RegBtn);
         List<WebElement> errorList = driver.findElements(By.cssSelector(".alert.alert-danger li"));
         ArrayList<String> errorListSTR = new ArrayList<String>();
         for (WebElement error : errorList) {
@@ -335,12 +324,16 @@ public class AuthenticationPage extends HomePage {
         //Fill sign in credentials
         fillText(emailAddressSignIn, Email);
         fillText(PasswordSignIn, Password);
-        Click(getSignInBtn());
+        click(getSignInBtn());
     }
 
     public void NavToSignUp(String Email) {
         fillText(emailAddressField, Email);
-        Click(CreateAccBtn);
+        click(CreateAccBtn);
+    }
+
+    public String getSignInErrorText(){
+        return this.signInError.getText();
     }
 
 

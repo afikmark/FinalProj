@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public abstract class BasePage {
+public  class BasePage {
     WebDriver driver;
-    Utils1 utils = new Utils1();
+
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -23,8 +23,7 @@ public abstract class BasePage {
     }
 
     public String getURL(){
-        String URL =driver.getCurrentUrl();
-        return URL;
+        return driver.getCurrentUrl();
     }
 
 
@@ -34,20 +33,16 @@ public abstract class BasePage {
     }
 
     public void explicitWaitVisibility(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 60);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void explicitWaitClickable(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 60);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
 
-    public void explicitWaitAllElements(List<WebElement> elements) {
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
-    }
 
     public void selectByValue(WebElement el, String Value) {
         Select s = new Select(el);
@@ -71,11 +66,11 @@ public abstract class BasePage {
         el.sendKeys(text);
     }
 
-    public void Click(WebElement el) {
+    public void click(WebElement el) {
         explicitWaitClickable(el);
         el.click();
     }
-    public void DoubleClick(WebElement el){
+    public void doubleClick(WebElement el){
         Actions action = new Actions(driver);
         action.doubleClick(el);
         action.build();

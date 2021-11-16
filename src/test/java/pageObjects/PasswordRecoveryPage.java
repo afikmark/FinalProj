@@ -74,10 +74,10 @@ public class PasswordRecoveryPage extends HomePage {
         //enter email
         fillText(emailAddress, Email);
         //click on retrieve password
-        Click(retrievePasswordBtn);
+        click(retrievePasswordBtn);
     }
     public void ClickBackToLogin(){
-        Click(backToLoginBtn);
+        click(backToLoginBtn);
     }
 
 

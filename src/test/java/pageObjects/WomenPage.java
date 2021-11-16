@@ -29,10 +29,10 @@ public class WomenPage extends HomePage{
     private List<WebElement> chooseColorList;
 
     public void clickTops(){
-        Click(tops);
+        click(tops);
     }
     public void clickTshirts(){
-        Click(tshirts);
+        click(tshirts);
     }
 
     public WebElement getTops() {
@@ -89,7 +89,7 @@ public WebElement getProceedToCheckoutBtn() {
                 MoveToElement(item);
                 for(int i=0;i<addToCartButtons.size();i++){
                     WebElement addToCartButton = addToCartButtons.get(itemNameListIndex);
-                    Click(addToCartButton);
+                    click(addToCartButton);
                     break;
                 }
                 break;

@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
 
-public class ShoppingCart extends Login {
+public class ShoppingCart extends BaseTest {
 
     final String expectedOrderCompleteMSG = "Your order on My Store is complete.";
     final String expectedDressesCategory = "Dresses";
@@ -16,31 +16,31 @@ public class ShoppingCart extends Login {
     @Description("Choose product from list")
     @Severity(SeverityLevel.CRITICAL)
     public void chooseProduct(){
-        HomePage hp = new HomePage(driver);
-        hp.ClickWomenCat();
+        var homePage = new HomePage(driver);
+        homePage.ClickWomenCat();
         WomenPage womenCategory = new WomenPage(driver);
         womenCategory.chooseItem(0);
         //click proceed to checkout POP UP
-        hp.Click(womenCategory.getProceedToCheckoutBtn());
+        homePage.click(womenCategory.getProceedToCheckoutBtn());
     }
     @Test(description = "Buy a T-Shirt")
     @Description("Buy a T-Shirt")
     @Severity(SeverityLevel.CRITICAL)
     public void BuyTShirt(){
-        ShoppingCartSummaryPage scs = new ShoppingCartSummaryPage(driver);
+        var scs = new ShoppingCartSummaryPage(driver);
         //summary proceed to checkout
-        scs.Click(scs.getSpProceedToCheckOutSummaryBtn());
+        scs.click(scs.getSpProceedToCheckOutSummaryBtn());
         //Address proceed to checkout
-        scs.Click(scs.getSpProceedToCheckOutAddress());
+        scs.click(scs.getSpProceedToCheckOutAddress());
         // agree to terms and services
-        scs.Click(scs.getTermsOfSerivceCheckBox());
+        scs.click(scs.getTermsOfSerivceCheckBox());
         //shipping proceed to checkout
-        scs.Click(scs.getSpProceedToCheckOutCarrierBtn());
+        scs.click(scs.getSpProceedToCheckOutCarrierBtn());
         //Choose payment method
         scs.choosePaymentMethod("Bank");
         //confirm order
-        scs.Click(scs.getConfirmOrderBtn());
-        String confirmationText = scs.readTextBox();
+        scs.click(scs.getConfirmOrderBtn());
+        var confirmationText = scs.readTextBox();
         Assert.assertEquals(confirmationText,expectedOrderCompleteMSG);
     }
 
@@ -48,10 +48,10 @@ public class ShoppingCart extends Login {
     @Description("Select color")
     @Severity(SeverityLevel.MINOR)
     public void colorSelection(){
-        HomePage hp = new HomePage(driver);
-        hp.ClickWomenCat();
-        WomenPage wp = new WomenPage(driver);
-        hp.Click(wp.getDresses());
+        var homePage = new HomePage(driver);
+        homePage.ClickWomenCat();
+        var womenPage = new WomenPage(driver);
+        homePage.click(womenPage.getDresses());
         String categoryName = checkCategory();
         Assert.assertEquals(categoryName,expectedDressesCategory);
     }

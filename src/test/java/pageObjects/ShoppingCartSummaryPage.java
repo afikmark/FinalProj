@@ -51,10 +51,10 @@ public class ShoppingCartSummaryPage extends HomePage {
     public void choosePaymentMethod(String payment) {
         switch (payment) {
             case "Bank":
-                Click(payByBankWire);
+                click(payByBankWire);
                 break;
             case "Check":
-                Click(payByCheck);
+                click(payByCheck);
         }
     }
 

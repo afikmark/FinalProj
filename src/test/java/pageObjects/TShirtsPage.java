@@ -34,23 +34,23 @@ public class TShirtsPage extends WomenPage {
     public void ChooseSize(String sizeLetter){
         switch (sizeLetter){
             case "S":
-                Click(sizeS);
+                click(sizeS);
                 break;
             case "M":
-                Click(sizeM);
+                click(sizeM);
                 break;
             case "L":
-                Click(sizeL);
+                click(sizeL);
         }
     }
 
     public void ChooseColor(String colorName){
         switch (colorName){
             case "Orange":
-                Click(colorOrange);
+                click(colorOrange);
                 break;
             case "Blue":
-                Click(colorBlue);
+                click(colorBlue);
                 break;
         }
     }

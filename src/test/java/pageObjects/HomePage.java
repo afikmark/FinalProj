@@ -17,7 +17,11 @@ public class HomePage extends BasePage {
     @FindBy (css= "#block_top_menu .submenu-container ul >li [title='T-shirts']")
     private  WebElement womenTshirts;
     @FindBy (css=".category-name")
-    WebElement categoryName;
+   private WebElement categoryName;
+
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
 
     public WebElement getSignInBtn() {
         return signInBtn;
@@ -39,20 +43,18 @@ public class HomePage extends BasePage {
         return categoryName;
     }
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-    }
+
     @Step("Navigate to sign in page {0}")
     public void navToSignIn(){
-        Click(signInBtn);
+        click(signInBtn);
     }
     @Step("Click on signout button {1}")
     public void signOut(){
-        Click(signOutBtn);
+        click(signOutBtn);
     }
     @Step("Click on WomenPage category {2}")
     public void ClickWomenCat(){
-        Click(womenCategory);
+        click(womenCategory);
     }
 
 

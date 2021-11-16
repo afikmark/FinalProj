@@ -9,7 +9,7 @@ import pageObjects.HomePage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignUp extends Login {
+public class SignUp extends BaseTest {
 
 
     final String InvalidFirstName = "19123123";
@@ -21,21 +21,14 @@ public class SignUp extends Login {
     ArrayList<String> expectedErrorList = new ArrayList<String>();
 
 
-//   expectedErrorList.add("lastname is invalid.");
-//1 = firstname is invalid.
-//2 = passwd is invalid.
-//3 = address1 is required.
-//4 = city is required.
-//5 = The Zip/Postal code you've entered is invalid. It must follow this format: 00000
-//            6 = This country requires you to choose a State.
-
     @Test(description = "Sign-up with valid information")
     @Description("Sign-up with valid information")
     public void SignUpValid() {
-        HomePage hp = new HomePage(driver);
-        AuthenticationPage ap = new AuthenticationPage(driver);
-        hp.navToSignIn();
-        ap.SignUp(user);
+        var homePage = new HomePage(driver);
+        homePage.navToSignIn();
+        var authenticationPage = new AuthenticationPage(driver);
+        var login = new Login();
+        authenticationPage.SignUp(user, login.getValidEmail());
     }
 
     @Test(description = "Sign up with invalid form information")
@@ -48,32 +41,35 @@ public class SignUp extends Login {
         expectedErrorList.add("city is required.");
         expectedErrorList.add("The Zip/Postal code you've entered is invalid. It must follow this format: 00000");
         expectedErrorList.add("This country requires you to choose a State.");
-        HomePage hp = new HomePage(driver);
+        var homePage = new HomePage(driver);
         AuthenticationPage ap = new AuthenticationPage(driver);
-        hp.navToSignIn();
-        ap.NavToSignUp(UnregisteredEmail);
-        List<String> actualErrorList = ap.SignUpInvalid(InvalidFirstName, InvalidLastName, invalidPassword, InvalidZip, InvalidHomePhone, InvalidMobilePhone);
-        Assert.assertEquals(expectedErrorList,actualErrorList);
+        homePage.navToSignIn();
+        var login = new Login();
+        ap.NavToSignUp(login.getUnregisteredEmail());
+        List<String> actualErrorList = ap.SignUpInvalid(InvalidFirstName, InvalidLastName, login.getInvalidPassword(), InvalidZip, InvalidHomePhone, InvalidMobilePhone);
+        Assert.assertEquals(expectedErrorList, actualErrorList);
     }
 
-    @Test(description = "Sign up with invalid email")
-    @Description("Sign up with invalid email")
+    @Test(description = "attempt to create an account with invalid email")
+    @Description("attempt to create an account  invalid email")
     public void InvalidEmail() {
-        HomePage hp = new HomePage(driver);
-        AuthenticationPage ap = new AuthenticationPage(driver);
-        hp.navToSignIn();
-        String actualError = ap.SignupInvalidMail(inValidEmail);
-        Assert.assertEquals(actualError, expectedInvalidEmail);
+        var homePage = new HomePage(driver);
+        var authenticationPage = new AuthenticationPage(driver);
+        homePage.navToSignIn();
+        var login = new Login();
+        String actualError = authenticationPage.createAccount(login.getInValidEmail());
+        Assert.assertEquals(actualError, login.getExpectedInvalidEmail());
     }
 
-    @Test(description = "Sign up with used mail")
-    @Description("Sign up with used mail")
+    @Test(description = "attempt to create an account  with used mail")
+    @Description("attempt to create an account  used mail")
     public void UsedMail() {
-        HomePage hp = new HomePage(driver);
-        AuthenticationPage ap = new AuthenticationPage(driver);
-        hp.navToSignIn();
-       String actualError = ap.SignUpUsedEmail(validEmail);
-       Assert.assertEquals(actualError,expectedUsedEmailError);
+        var homePage = new HomePage(driver);
+        var authenticationPage = new AuthenticationPage(driver);
+        homePage.navToSignIn();
+        var login = new Login();
+        String actualError = authenticationPage.createAccount(login.getValidEmail());
+        Assert.assertEquals(actualError, expectedUsedEmailError);
     }
 
 }
